@@ -19,7 +19,7 @@ import models
 from Crypto.Hash import SHA256
 from secrets import Secret
 from blog_controllers import Handler
-
+import datetime
 
 class Register(Handler):
 
@@ -52,7 +52,7 @@ class Register(Handler):
             self.redirect("/?error=" + message + "#register")
         else:
             error = ("Registration error.%0A"
-                       "Please re-enter your registration and try again.")
+                     "Please re-enter your registration and try again.")
             self.redirect("/#login?error=" + error + "#register")
 
 
@@ -69,16 +69,17 @@ class Login(Handler):
             u = models.User.get_by_key_name(name)
             if not u:
                 error = ("Username not found.%0ACheck the spelling or "
-                           "create a new account.")
+                         "create a new account.")
                 self.redirect("/?error=" + error + "#login")
             else:
                 password = SHA256.new(
                     raw_pass + Secret.local_auth_secret).hexdigest()
                 if password != u.pass_hash:
                     error = ("Invalid password.%0A"
-                               "Retype your password and try again.")
+                             "Retype your password and try again.")
                     self.redirect("/?error=" + error + "#login")
                 else:
+                    message = "Welcome back!"
                     auth = SHA256.new(name + Secret.cookie_secret).hexdigest()
                     self.redirect("/?message={0}&username={1}&auth={2}"
                                   .format(message, name, auth))
@@ -87,7 +88,17 @@ class Login(Handler):
 class Logout(Handler):
 
     def get(self):
-        self.response.delete_cookie("user")
-        self.response.delete_cookie("auth")
+        self.response.set_cookie(
+            key="auth",
+            value="",
+            path='/',
+            secure=True,
+            expires=datetime.datetime.fromtimestamp(0))
+        self.response.set_cookie(
+            key="user",
+            value="",
+            path='/',
+            secure=True,
+            expires=datetime.datetime.fromtimestamp(0))
         message = "Logged out."
         self.redirect("/?message=" + message)

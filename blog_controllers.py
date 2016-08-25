@@ -123,14 +123,12 @@ class MainPage(Handler):
                     key="auth",
                     value=auth,
                     path='/',
-                    domain='sh-udacity-blog.appspot.com',
-                    secure=False)
+                    secure=True)
                 self.response.set_cookie(
                     key="user",
                     value=username,
                     path='/',
-                    domain='sh-udacity-blog.appspot.com',
-                    secure=False)
+                    secure=True)
         # Retrieve up to 5 posts from the database
         offset = self.request.get("offset")
         if offset:
@@ -234,7 +232,7 @@ class EditPost(Handler):
             else:
                 self.render("new.html",
                             message="Editing post.",
-                            author=post.author,
+                            user=post.author,
                             title=post.title,
                             text=text,
                             action="edit",
