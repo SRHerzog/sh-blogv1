@@ -123,13 +123,13 @@ class MainPage(Handler):
                     key="auth",
                     value=auth,
                     path='/',
-                    domain='localhost',
+                    domain='sh-udacity-blog.appspot.com',
                     secure=False)
                 self.response.set_cookie(
                     key="user",
                     value=username,
                     path='/',
-                    domain='localhost',
+                    domain='sh-udacity-blog.appspot.com',
                     secure=False)
         # Retrieve up to 5 posts from the database
         offset = self.request.get("offset")

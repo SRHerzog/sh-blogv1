@@ -1,6 +1,6 @@
 **Multi-user Blog**
 =======
-#### Live version:
+#### Live version: sh-
 
 Barebones blogging platform with open user registration.
 
@@ -12,6 +12,7 @@ Barebones blogging platform with open user registration.
 	class Secret():
 		local_auth_secret = "string"
 		cookie_secret = "string"
+```
 ---
 ####
 This app is powered by Google App Engine. This project is a component of the [Udacity](http://www.udacity.com/) Full Stack Web Development Nanodegree.
