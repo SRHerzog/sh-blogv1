@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/style.css">
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<title>Steve's Blog</title>
+</head>
+<body>
+	<div class="container">
+		<header class="page-top">
+			<h1 class="page-title"><a href="/" class="index-link">Steve's Blog</a></h1>
+		</header>
+		<div class="site-message" id="message">{{message|safe}}</div>
+		<main>
+		{% block content %}
+		{% endblock %}
+		</main>
+		<nav class="sidebar">
+		{% include 'sidebar.html' %}
+		</nav>
+	</div>
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+body {
+	font-family: "Arial", sans-serif;
+}
+
+.site-message {
+	height: 20px;
+	line-height: 20px;
+	font-weight: bold;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.container {
+	padding: 0 40px;
+	width: 960px;
+	margin: 0 auto;
+}
+
+.page-top {
+	background-color: #fee;
+	padding: 10px;
+	height: 100px;
+	line-height: 100px;
+}
+
+.page-title {
+	margin: 0 0 0 30px;
+}
+
+.index-link:link {
+	text-decoration: none;
+}
+
+.index-link:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
+.index-link:hover {
+	color: #f44;
+}
+
+.index-link:active {
+	color: inherit;
+}
+
+main {
+	display: inline-block;
+	float: left;
+	padding: 0;
+	width: 650px;
+	margin: 20px 20px 0 0;
+}
+
+.sidebar {
+	display: inline-block;
+	float: right;
+	padding: 0;
+	width: 250px;
+}
+
+.blog-post {
+	background-color: #eef;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.new-post {
+	margin-bottom: 20px;
+}
+
+.top-controls {
+	margin-bottom: 20px;
+}
+
+.login-register {
+	display: none;
+}
+
+.login-register:target {
+	display: block;
+}
+
+.login-register:target:before {
+	content: "";
+	display: block;
+	height: 190px; /* fixed header height*/
+	margin: -190px 0 0; /* negative fixed header height */
+}
+
+.invalid {
+	background-color:#faa;
+}
+
+.comment {
+	background-color: #efe;
+	padding: 10px;
+	margin-top: 20px;
+}
+
+.comment-attrib {
+	font-size: .8em;
+	margin-bottom: 5px;
+}
+
+.edit {
+	font-style: italic;
+}
+
+.new-comment {
+	display: none;
+}
+
+.new-comment:target {
+	display: block;
+}
+
+.singlebutton {
+	display: inline;
+	margin-right: 10px;
+}
+
+label {
+	display: block;
+	margin: 0 0 10px;
+}
+
+textarea {
+	width: 100%;
+	margin-top: 5px;
+}
+
+.post-entry {
+	height: 600px;
+}
+
+.comment-entry {
+	height: 100px;
+}
+
+.newer {
+	display: inline-block;
+	float: left;
+}
+
+.older {
+	display: inline-block;
+	float: right;
+}
+
+.welcome {
+	padding: 10px;
+}
+
+.error {
+	background-color: #f33;
+	color: #fff;
+	padding: 10px;
+}
+
+.major {
+	display: inline-block;
+	font-size: 1.5em;
+	padding: 10px;
+	font-weight: bold;
+	background-color: #efe;
+	margin-bottom: 10px;
+}
+
+.minor {
+	display: inline-block;
+	padding: 10px;
+	background-color: #eee;
+}
+
+/* TODO
+	
+	Improve control panel
+		Move new post, login, and register to sidebar
+	Mobile display
+		Bottom nav
+
+*/

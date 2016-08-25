@@ -1,0 +1,78 @@
+{% extends "main.html" %}
+
+{% block content %}
+	<article class="blog-post" id="post-id" data-post="{{p.key().id()}}">
+		<header class="post-header">
+			<h1>{{p.title}}</h1>
+			<h4>by {{p.author}}, {{p.created}}</h4>
+			{% if own_post %}
+			<div class="post-controls">
+				<form class="singlebutton" id="edit-post" method="get" action="/edit">
+					<input type="hidden" name="id" value="{{p.key().id()}}">
+					<input type="submit" value="Edit">
+				</form>
+				<form class="singlebutton" id="delete-post" method="post" action="/delete">
+					<input type="hidden" name="id" value="{{p.key().id()}}">
+					<input type="submit" value="Delete">
+				</form>
+			</div>
+			{% endif %}
+		</header>
+		<div class="post-body">
+			<p>{{p.text}}</p>
+			{% if user in p.likes %}
+			<form class="singlebutton like" method="post"
+				data-post="{{p.key().id()}}" action="/unlike">
+				<input type="hidden" name="post_id" value="{{p.key().id()}}">
+				<input type="submit" value="Unlike" class="likebutton">
+			</form>
+			{% endif %}
+			{% if user and not (own_post or user in p.likes) %}
+			<form class="singlebutton like" method="post"
+				data-post="{{p.key().id()}}" action="/like">
+				<input type="hidden" name="post_id" value="{{p.key().id()}}">
+				<input type="submit" value="Like"  class="likebutton">
+			</form>
+			{% endif %}
+			<span class="likes">
+				<span id="l{{p.key().id()}}">{{p.likes|length}}</span> like(s)
+			</span>
+		</div>
+	</article>
+	{% if user %}
+	<h3><a href="#newcomment" id="post-link">Post a new comment</a></h3>
+	<div class="new-comment" id="newcomment">
+		<form id="comment-form" method="post" action="/newcomment">
+			<input type="hidden" name="parent" value="{{p.key().id()}}">	
+			<textarea class="comment-entry" id="content" name="content"></textarea>
+			<button type="button" id="cancel-edit">Cancel</button>
+			<input type="submit">
+		</form>
+	</div>
+	{% endif %}
+	{% for c in comments %}
+		<article class="comment" id="a{{c.key().id()}}">
+			<p class="comment-body" id="c{{c.key().id()}}">{{c.text}}</p>
+				{% if c.edited %}
+			<footer class="comment-attrib edit" id="t{{c.key().id()}}">
+				edited at {{c.edit_time}}
+			</footer>
+			{% endif %}
+			<footer class="comment-attrib">posted at {{c.created}} by {{c.author}}</footer>
+			{% if c.author == user %}
+				<form class="singlebutton edit-comment" id="e{{c.key().id()}}" method="get" action="/editcomment">
+					<input type="hidden" name="comment_id" value="{{c.key().id()}}">
+					<input type="hidden" id="parent" name="parent" value="{{p.key().id()}}">
+					<input type="submit" value="Edit">
+				</form>
+				<form class="singlebutton delete-comment" id="d{{c.key().id()}}" method="post" action="/deletecomment">
+					<input type="hidden" name="comment_id" value="{{c.key().id()}}">
+					<input type="hidden" name="parent" value="{{p.key().id()}}">
+					<input type="submit" value="Delete">
+				</form>
+				<!-- remember to populate edit form from JS -->
+			{% endif %}
+		</article>
+	{% endfor %}
+	<p><a href="{{url}}">Permalink ({{url}})</a></p>
+{% endblock %}

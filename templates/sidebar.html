@@ -1,0 +1,49 @@
+<div class="top-controls">
+	{% if error %}
+	<div class="error">
+		<h4>{{error}}</h4>
+	</div>
+	{% endif %}
+	{% if user %}
+		<h4 class="welcome">Welcome, {{user}}</h4>
+		<span class="major"><a href="/new">Write a new post</a></span><br />
+		<span class="minor"><a href="/logout">Log out</a></span>
+	{% else %}
+		<h4 class="major"><a href="#login">Login</a></h4>
+		<h4 class="major"><a href="#register">Register</a></h4>
+		<section class="login-register" id="login">
+			<h2 class="login-header">Log in!</h1>
+			<form id="login-form" method="post" action="/login">
+				<label for="name">Name<br />
+					<input type="text" name="name" required pattern="[a-zA-Z0-9]+">
+				</label>
+				<label for="password">Password<br />
+					<input type="password" name="password" required>
+				</label>
+				<input type="submit">
+			</form>
+		</section>
+		<section class="login-register" id="register">
+			<h2 class="login-header">Register new user</h2>
+			<form id="register-form" method="post" action="/register">
+				<label for="name">Name<br />
+					<input type="text" name="name" id="regname" required pattern="[a-zA-Z0-9]+">
+				</label>
+				<label for="password">Password<br />
+					<input type="password" class="pwform" id="password" name="password" required pattern=".{6,}">
+				</label>
+				<label for="reenter">Re-enter password<br />
+					<input type="password" class="pwform" id="reenter" name="reenter" required pattern=".{6,}">
+				</label>
+				<input type="submit" id="regsubmit">
+			</form>
+		</section>
+	{% endif %}
+</div>
+<!-- TODO
+<div class="extra-controls">
+	View posts by user<br />
+	View posts by tag<br />
+	View posts by month<br />
+</div>
+-->

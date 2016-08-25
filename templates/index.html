@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+
+{% block content %}
+	{% for p in posts %}
+		<article class="blog-post">
+			<header class="post-header">
+				<h1 class="blog-title">{{p.title}}</h1>
+				<h4 class="blog-attrib">by {{p.author}}, {{p.created}}</h4>
+			</header>
+			<div class="post-body">
+				<p>{{p.text}}</p>
+				{% if user in p.likes %}
+				<form class="singlebutton like" method="post"
+					data-post="{{p.key().id()}}" action="/unlike">
+					<input type="hidden" name="id" value="{{p.key().id()}}">
+					<input type="submit" value="Unlike" class="likebutton {{p.key().id()}}">
+				</form>
+				{% endif %}
+				{% if user and not (user == p.author or user in p.likes) %}
+				<form class="singlebutton like" method="post"
+					data-post="{{p.key().id()}}" action="/like">
+					<input type="hidden" name="id" value="{{p.key().id()}}">
+					<input type="submit" value="Like" class="likebutton	{{p.key().id()}}">
+				</form>
+				{% endif %}
+				<span class="likes">
+					<span id="l{{p.key().id()}}">{{p.likes|length}}</span> like(s)
+				</span>
+				<h3><a href="/p/{{p.key().id()}}">{{p.comment_count}} comment(s)...</a></h3>
+			</div>
+		</article>
+	{% endfor %}
+	<nav class="older-newer">
+		{% if offset > 0 %}
+		<div class="newer"><a href="/?offset={{offset-5}}">&lt;- Newer posts</a></div>
+		{% endif %}
+		{% if count > 5 %}
+		<div class="older"><a href="/?offset={{offset+5}}">Older posts -&gt;</a></div>
+		{% endif %}
+	</nav>
+{% endblock %}

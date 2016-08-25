@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+
+{% block content %}
+	<form name="edit-comment" method="post" action="/editcomment">
+		<input type="hidden" name="id" value="{{id}}">
+		<input type="hidden" name="parent" value="{{parent}}">
+		<label for="content">Edit comment:
+			<textarea name="content">{{text}}</textarea>
+		</label>
+		<input type="submit">
+	</form>
+	<h1>{{error}}</h1>
+{% endblock %}

@@ -1,0 +1,17 @@
+<article class="blog-post">
+	<header class="post-header">
+		<h1 class="blog-title">{{p.title}}</h1>
+		<h4 class="blog-attrib">by {{p.author}}, {{p.created}}</h4>
+	</header>
+	<div class="post-body">
+		<p>{{p.text}}</p>
+		{% if user and not (user == p.author or user in p.likes) %}
+		<form class="singlebutton like" method="post" action="/like">
+			<input type="hidden" name="id" value="{{p.key().id()}}">
+			<input type="submit" value="Like">
+		</form>
+		{% endif %}
+		<span class="likes">{{p.likes|length}} likes</span>
+		<h3><a href="/p/{{p.key().id()}}">{{p.comment_count}} comment(s)...</a></h3>
+	</div>
+</article>
