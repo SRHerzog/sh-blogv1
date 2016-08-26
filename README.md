@@ -1,6 +1,6 @@
 **Multi-user Blog**
 =======
-#### Live version: sh-
+#### Live version: [http://sh-udacity-blog.appspot.com/](http://sh-udacity-blog.appspot.com/)
 
 Barebones blogging platform with open user registration.
 
